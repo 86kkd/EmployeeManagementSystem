@@ -1,8 +1,7 @@
 from PyQt5 import QtCore,  QtWidgets
-from PyQt5.QtGui import QIntValidator
-from PyQt5.QtCore import QRegularExpression
-from PyQt5.QtGui import QRegExpValidator
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QRegExp
 
 class Ui_MainWindow(object):
@@ -57,8 +56,8 @@ class Ui_MainWindow(object):
         self.gender_label = QtWidgets.QLabel(self.centralwidget)
         self.gender_label.setObjectName("gender_label")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.gender_label)
-        self.gender_edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.gender_edit.setObjectName("gender_edit")
+        self.gender_edit = QComboBox()
+        self.gender_edit.addItems(['男', '女'])
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.gender_edit)
         self.birth_date_label = QtWidgets.QLabel(self.centralwidget)
         self.birth_date_label.setObjectName("birth_date_label")

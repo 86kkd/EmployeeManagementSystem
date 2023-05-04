@@ -107,7 +107,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def add_employee(self):
         employee = Employee(
             self.name_edit.text(),
-            self.gender_edit.text(),
+            self.gender_edit.currentText(),
             self.birth_date_edit.text(),
                         self.hire_date_edit.text(),
             self.education_edit.text(),
@@ -126,7 +126,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_employee(self):
         name = self.name_edit.text()
         update_values = {
-            "gender": self.gender_edit.text(),
+            "gender": self.gender_edit.currentText(),
             "birth_date": self.birth_date_edit.text(),
             "hire_date": self.hire_date_edit.text(),
             "education": self.education_edit.text(),
@@ -140,7 +140,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def find_employee(self):
         search_values = {
             "name": self.name_edit.text(),
-            "gender": self.gender_edit.text(),
+            "gender": self.gender_edit.currentText(),
             "birth_date": self.birth_date_edit.text(),
             "hire_date": self.hire_date_edit.text(),
             "education": self.education_edit.text(),

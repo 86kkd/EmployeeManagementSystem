@@ -18,5 +18,15 @@
         "title": "员工",
         "address": "沈阳",
         "phone": "166229900444"
+    },
+    "g": {
+        "name": "g",
+        "gender": "男",
+        "birth_date": "233",
+        "hire_date": "425",
+        "education": "高中",
+        "title": "员工",
+        "address": "上海",
+        "phone": "213412345"
     }
 }
