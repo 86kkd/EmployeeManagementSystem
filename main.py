@@ -3,7 +3,7 @@ import sys
 import csv
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDialog
 from employee_management_ui import Ui_MainWindow
-
+from PyQt5.QtWidgets import *
 
 class Employee:
     def __init__(self, name, gender, birth_date, hire_date, education, title, address, phone):
@@ -57,10 +57,9 @@ class EmployeeManagementSystem:
         else:
             print(f"Employee '{name}' not found")
 
-    def sort_employee_by_attribute(self, attribute):
-        self.employees = {k: v for k, v in sorted(self.employees.items(), key=lambda item: item[1][attribute])}
-    def sort_employee_by_name(self):
-        self.employees = {k: v for k, v in sorted(self.employees.items(), key=lambda item: item[1]['name'])}
+    def sort_employees(self, key):
+        self.employees = dict(sorted(self.employees.items(), key=lambda item: item[1][key]))
+        self._save()
 
     def _save(self):
         with open(self.file_name, "w") as f:
@@ -73,6 +72,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.ems = EmployeeManagementSystem("employees.json")
         self.init_table()
+
+        self.menubar = self.menubar
+        self.menu = QMenu('file')
+        self.menubar.addMenu(self.menu)
+        self.import_csv_action = QAction('import_csv_action',self)
+        self.menu.addAction(self.import_csv_action)
+        self.menubar.addAction(self.menu.menuAction())
 
         self.add_employee_button.clicked.connect(self.add_employee)
         self.remove_employee_button.clicked.connect(self.remove_employee)
@@ -91,10 +97,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.refresh_table()
 
     def refresh_table(self):
+        self.file_name = self.ems.file_name
+        try:
+            with open(self.file_name, "r") as f:
+                self.employees = json.load(f)
+                self.ems.employees = self.employees
+        except FileNotFoundError:
+            self.employees = {}
+        self.employee_table.clear()
+        self.employee_table.setRowCount(len(self.employees))
         for row, employee in enumerate(self.ems.employees.values()):
             for col, key in enumerate(employee):
                 item = QTableWidgetItem(str(employee[key]))
+
                 self.employee_table.setItem(row, col, item)
+                self.employee_table.update()
 
     def add_employee(self):
         employee = Employee(
@@ -172,7 +189,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.refresh_table()
     def sort_employee(self):
         
-        self.ems.sort_employee_by_name()
+        self.ems.sort_employees('birth_date')
         self.refresh_table()
 
 if __name__ == "__main__":
