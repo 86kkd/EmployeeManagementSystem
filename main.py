@@ -3,7 +3,7 @@ import sys
 import csv
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDialog
 from employee_management_ui import Ui_MainWindow
-from PyQt5.QtWidgets import *
+
 
 class Employee:
     def __init__(self, name, gender, birth_date, hire_date, education, title, address, phone):
@@ -73,13 +73,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ems = EmployeeManagementSystem("employees.json")
         self.init_table()
 
-        self.menubar = self.menubar
-        self.menu = QMenu('file')
-        self.menubar.addMenu(self.menu)
-        self.import_csv_action = QAction('import_csv_action',self)
-        self.menu.addAction(self.import_csv_action)
-        self.menubar.addAction(self.menu.menuAction())
-
         self.add_employee_button.clicked.connect(self.add_employee)
         self.remove_employee_button.clicked.connect(self.remove_employee)
         self.update_employee_button.clicked.connect(self.update_employee)
@@ -109,9 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for row, employee in enumerate(self.ems.employees.values()):
             for col, key in enumerate(employee):
                 item = QTableWidgetItem(str(employee[key]))
-
                 self.employee_table.setItem(row, col, item)
-                self.employee_table.update()
 
     def add_employee(self):
         employee = Employee(

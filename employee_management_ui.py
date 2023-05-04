@@ -1,10 +1,30 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5 import QtCore,  QtWidgets
+from PyQt5.QtGui import QIntValidator
+from PyQt5.QtCore import QRegularExpression
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QRegExp
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+
+        # 添加菜单栏功能
+        self.menubar = MainWindow.menuBar()
+        self.fileMenu = self.menubar.addMenu("File")
+        self.import_csv_action = QtWidgets.QAction('load csv',MainWindow)
+        self.exitAction = QtWidgets.QAction("Exit", MainWindow)
+        self.exitAction.triggered.connect(QtWidgets.qApp.quit)
+        self.fileMenu.addAction(self.exitAction)
+        self.fileMenu.addAction(self.import_csv_action)
+
+        # self.menubar = QtWidgets.QMenuBar(MainWindow)
+        # self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        # self.menubar.setObjectName("menubar")
+        # MainWindow.setMenuBar(self.menubar)
+
+        # 在原有按钮之后添加排序按钮
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -77,18 +97,24 @@ class Ui_MainWindow(object):
         self.phone_edit.setObjectName("phone_edit")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.phone_edit)
         self.gridLayout.addLayout(self.formLayout, 1, 0, 1, 3)
+        
+        # 设置 birth_date_edit 只能输入四位数的数字
+        birth_date_validator = QIntValidator(1000, 9999)
+        self.birth_date_edit.setValidator(birth_date_validator)
+
+        # 设置 hire_date_edit 只能输入四位数的数字
+        hire_date_validator = QIntValidator(1000, 9999)
+        self.hire_date_edit.setValidator(hire_date_validator)
+        # 设置 gender_edit 只能输入 '男' 或 '女'
+        gender_regex = QRegExp("^(男|女)$")
+        gender_validator = QRegExpValidator(gender_regex, self.gender_edit)
+        self.gender_edit.setValidator(gender_validator)
         self.employee_table = QtWidgets.QTableWidget(self.centralwidget)
         self.employee_table.setObjectName("employee_table")
         self.employee_table.setColumnCount(0)
         self.employee_table.setRowCount(0)
         self.gridLayout.addWidget(self.employee_table, 2, 0, 1, 5)
-
-
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)

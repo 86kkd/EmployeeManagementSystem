@@ -1,32 +1,22 @@
 {
-    "c": {
-        "name": "c",
+    "a": {
+        "name": "a",
         "gender": "男",
-        "birth_date": "2022-3-2",
-        "hire_date": "2033-2-2",
-        "education": "本科",
-        "title": "员工",
-        "address": "芳草路122",
-        "phone": "15577889966"
-    },
-    "y": {
-        "name": "y",
-        "gender": "男",
-        "birth_date": "2022-3-2",
-        "hire_date": "2033-2-2",
-        "education": "本科",
-        "title": "员工",
-        "address": "芳草路122",
-        "phone": "15577889966"
-    },
-    "阿": {
-        "name": "阿",
-        "gender": "男",
-        "birth_date": "2022-1",
-        "hire_date": "23-3",
-        "education": "高中",
+        "birth_date": "1997",
+        "hire_date": "2003",
+        "education": "大学",
         "title": "员工",
         "address": "沈阳",
-        "phone": "177227727727"
+        "phone": "166229900444"
+    },
+    "b": {
+        "name": "b",
+        "gender": "男",
+        "birth_date": "1998",
+        "hire_date": "2001",
+        "education": "大学",
+        "title": "员工",
+        "address": "沈阳",
+        "phone": "166229900444"
     }
 }
